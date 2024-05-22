@@ -1,3 +1,4 @@
+const session = require('express-session');
 const User = require('./../models/user')
 
 exports.getLogin = (req, res, next) => {
@@ -12,8 +13,6 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.postLogin = (req, res, next) => {
-
-
     User.findById('6649ea3df1aa32a4e58db468')
         .then(user => {
             req.session.user = user;
@@ -22,8 +21,12 @@ exports.postLogin = (req, res, next) => {
         })
         .catch(err => console.log(err));
 
-    //res.setHeader('Set-Cookie', "loggedIn=true;Max-Age=10")
 
+}
 
-
+exports.postLogout = (req, res, next) => {
+    req.session.destroy((err) => {
+        console.log(err);
+        res.redirect('/')
+    })
 }
