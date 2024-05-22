@@ -15,7 +15,7 @@ exports.postAddProduct = async (req, res, next) => {
     const imageUrl = req.body.imageUrl;
     const price = req.body.price;
     const description = req.body.description;
-    const product = new Product({ title: title, imageUrl: imageUrl, price: price, description: description, userId: req.session.user });
+    const product = new Product({ title: title, imageUrl: imageUrl, price: price, description: description, userId: req.user });
     const result = await product.save()
     console.log('data saved ', result);
     res.redirect('/admin/products');
